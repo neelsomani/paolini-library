@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 import './globals.css'
 import Navigation from '@/components/Navigation'
+
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Paolini Library',
@@ -15,13 +18,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="min-h-screen flex flex-col">
+      <body className={inter.className}>
         <Navigation />
         <main className="flex-grow">
           {children}
         </main>
-        <footer className="bg-gray-100 py-4 text-center text-gray-600 text-sm">
-          Website built by Neel Somani and donated to American Legion Post 246
+        <footer className="bg-gray-50 py-4 mt-8">
+          <div className="container mx-auto px-4 text-center text-gray-600">
+            Website built by Neel Somani for the benefit of American Legion Post 246
+          </div>
         </footer>
       </body>
     </html>
