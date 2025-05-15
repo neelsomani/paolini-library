@@ -1,29 +1,6 @@
 import { NextResponse } from 'next/server'
 import { books } from '@/data/books'
 
-// This would typically come from a database
-const books = [
-  {
-    id: 1,
-    title: "The Second World War",
-    author: "Winston Churchill",
-    year: 1948,
-    category: "WWII History",
-    description: "A comprehensive history of World War II",
-    isbn: "978-0395416853"
-  },
-  {
-    id: 2,
-    title: "Band of Brothers",
-    author: "Stephen E. Ambrose",
-    year: 1992,
-    category: "WWII History",
-    description: "The story of Easy Company",
-    isbn: "978-0743216381"
-  },
-  // Add more books as needed
-]
-
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const page = parseInt(searchParams.get('page') || '1')
