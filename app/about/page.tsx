@@ -41,7 +41,8 @@ export default function About() {
           <h2 className="text-2xl font-semibold text-gray-900 mb-4">The Collection</h2>
           <div className="prose prose-lg">
             <p className="text-gray-600 mb-4">
-              The library's current collection focuses primarily on World War II history, featuring:
+              The library's current collection consists of approximately 1,400 books on display, with an additional 3,500 volumes in storage. 
+              The collection focuses primarily on World War II history, featuring:
             </p>
             <ul className="list-disc list-inside text-gray-600 space-y-2 mb-4">
               <li>First-hand accounts and memoirs</li>
