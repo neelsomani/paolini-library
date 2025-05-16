@@ -106,6 +106,15 @@ export default function Home() {
       {/* Alphabet Navigation */}
       <div className="mb-8">
         <div className="flex flex-wrap justify-center gap-2">
+          <button
+            onClick={() => handleLetterClick('0-9')}
+            className={`w-8 h-8 flex items-center justify-center rounded-md text-sm font-medium transition-colors
+              ${selectedLetter === '0-9' 
+                ? 'bg-blue-600 text-white' 
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+          >
+            0-9
+          </button>
           {alphabet.map((letter) => (
             <button
               key={letter}

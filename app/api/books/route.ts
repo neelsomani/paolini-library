@@ -9,6 +9,9 @@ export async function GET(request: Request) {
   const sort = searchParams.get('sort') || 'title'
   const letter = searchParams.get('letter') || ''
 
+  // Helper function to clean titles
+  const cleanTitle = (title: string) => title.replace(/["']/g, '').trim()
+
   // Filter books based on search query and/or letter
   let filteredBooks = books
   
@@ -23,14 +26,23 @@ export async function GET(request: Request) {
   } 
   // If no search query but there is a letter filter, apply letter filtering
   else if (letter) {
-    filteredBooks = books.filter(book => 
-      book.title.toUpperCase().startsWith(letter)
-    )
+    filteredBooks = books.filter(book => {
+      const title = cleanTitle(book.title)
+      if (letter === '0-9') {
+        // Check if the title starts with any digit
+        return /^\d/.test(title)
+      }
+      return title.toUpperCase().startsWith(letter)
+    })
   }
 
   // Sort books
   if (sort === 'title') {
-    filteredBooks.sort((a, b) => a.title.localeCompare(b.title))
+    filteredBooks.sort((a, b) => {
+      const titleA = cleanTitle(a.title)
+      const titleB = cleanTitle(b.title)
+      return titleA.localeCompare(titleB)
+    })
   }
 
   // Calculate pagination
