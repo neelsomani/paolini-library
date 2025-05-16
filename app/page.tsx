@@ -23,6 +23,8 @@ interface PaginationInfo {
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(1)
   const [searchQuery, setSearchQuery] = useState('')
+  const [searchInput, setSearchInput] = useState('')
+  const [selectedLetter, setSelectedLetter] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [books, setBooks] = useState<Book[]>([])
   const [pagination, setPagination] = useState<PaginationInfo>({
@@ -40,7 +42,8 @@ export default function Home() {
         page: currentPage.toString(),
         limit: '12',
         search: searchQuery,
-        sort: searchQuery ? 'relevance' : 'title'
+        sort: searchQuery ? 'relevance' : 'title',
+        letter: selectedLetter || ''
       })
       
       const response = await fetch(`/api/books?${params}`)
@@ -57,13 +60,23 @@ export default function Home() {
 
   useEffect(() => {
     fetchBooks()
-  }, [currentPage, searchQuery])
+  }, [currentPage, searchQuery, selectedLetter])
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
     setCurrentPage(1) // Reset to first page on new search
-    fetchBooks()
+    setSelectedLetter(null) // Clear letter filter when searching
+    setSearchQuery(searchInput) // Update the actual search query
   }
+
+  const handleLetterClick = (letter: string) => {
+    setSelectedLetter(letter === selectedLetter ? null : letter)
+    setCurrentPage(1)
+    setSearchQuery('')
+    setSearchInput('') // Clear the search input when selecting a letter
+  }
+
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -76,8 +89,8 @@ export default function Home() {
             <input
               type="text"
               placeholder="Search by title, author, or ISBN..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
               className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <button
@@ -88,6 +101,24 @@ export default function Home() {
             </button>
           </div>
         </form>
+      </div>
+
+      {/* Alphabet Navigation */}
+      <div className="mb-8">
+        <div className="flex flex-wrap justify-center gap-2">
+          {alphabet.map((letter) => (
+            <button
+              key={letter}
+              onClick={() => handleLetterClick(letter)}
+              className={`w-8 h-8 flex items-center justify-center rounded-md text-sm font-medium transition-colors
+                ${selectedLetter === letter 
+                  ? 'bg-blue-600 text-white' 
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+            >
+              {letter}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Loading State */}

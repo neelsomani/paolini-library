@@ -7,15 +7,24 @@ export async function GET(request: Request) {
   const limit = parseInt(searchParams.get('limit') || '12')
   const search = searchParams.get('search') || ''
   const sort = searchParams.get('sort') || 'title'
+  const letter = searchParams.get('letter') || ''
 
-  // Filter books based on search query
+  // Filter books based on search query and/or letter
   let filteredBooks = books
+  
+  // If there's a search query, search across all books
   if (search) {
     const searchLower = search.toLowerCase()
     filteredBooks = books.filter(book => 
       book.title.toLowerCase().includes(searchLower) ||
       book.author.toLowerCase().includes(searchLower) ||
-      book.isbn.includes(search)
+      (book.isbn && book.isbn.includes(search))
+    )
+  } 
+  // If no search query but there is a letter filter, apply letter filtering
+  else if (letter) {
+    filteredBooks = books.filter(book => 
+      book.title.toUpperCase().startsWith(letter)
     )
   }
 
