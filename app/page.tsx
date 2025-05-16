@@ -131,7 +131,7 @@ export default function Home() {
       {/* Results Count */}
       {!isLoading && (
         <div className="mb-4 text-gray-600">
-          Showing {books.length} of {pagination.totalBooks} books
+          Showing {((pagination.currentPage - 1) * 12) + 1} - {Math.min(pagination.currentPage * 12, pagination.totalBooks)} of {pagination.totalBooks} books
         </div>
       )}
 
