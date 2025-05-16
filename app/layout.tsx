@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Navigation from '@/components/Navigation'
@@ -6,9 +6,32 @@ import Navigation from '@/components/Navigation'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Paolini Library',
-  description: 'A collection of military history books at the Veteran\'s Memorial Building in Danville, CA',
-  generator: 'Next.js',
+  title: 'Paolini Library - Book Catalog',
+  description: 'Browse the Paolini Library collection of books. Search by title, author, or ISBN, or browse alphabetically. Built by Neel Somani.',
+  keywords: 'library, books, catalog, reading, search, browse, alphabet, Paolini Library, Neel Somani',
+  openGraph: {
+    title: 'Paolini Library - Book Catalog',
+    description: 'Browse the Paolini Library collection of books. Search by title, author, or ISBN, or browse alphabetically. Built by Neel Somani.',
+    type: 'website',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Paolini Library - Book Catalog',
+    description: 'Browse the Paolini Library collection of books. Search by title, author, or ISBN, or browse alphabetically. Built by Neel Somani.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+  },
+  authors: [{ name: 'Neel Somani' }],
+  icons: {
+    icon: '/icon.svg',
+  },
 }
 
 export default function RootLayout({
