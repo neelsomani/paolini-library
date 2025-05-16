@@ -8,7 +8,7 @@ export default function About() {
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
           <h2 className="text-2xl font-semibold text-gray-900 mb-4">Location</h2>
           <p className="text-gray-600 mb-4">
-            Veteran's Memorial Building<br />
+            Veterans Memorial Building<br />
             400 Hartz Ave<br />
             Danville, CA 94526
           </p>

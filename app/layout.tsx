@@ -48,7 +48,7 @@ export default function RootLayout({
         </main>
         <footer className="bg-gray-50 py-4 mt-8">
           <div className="container mx-auto px-4 text-center text-gray-600">
-            Website built by Neel Somani for the benefit of American Legion Post 246
+            Website built by Neel Somani for the benefit of Veterans Memorial Building of San Ramon Valley
           </div>
         </footer>
       </body>
